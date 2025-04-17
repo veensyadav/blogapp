@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"], textarea, input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .back-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Add New Blog</h2>
+
+  <form action="/api/user/blog/create" method="POST" enctype="multipart/form-data">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" placeholder="Blog Title" required />
+
+    <label for="description">Description</label>
+    <textarea name="description" id="description" placeholder="Short Description" required></textarea>
+
+    <label for="fullContent">Full Content</label>
+    <textarea name="fullContent" id="fullContent" placeholder="Full Blog Content" required></textarea>
+
+    <label for="image">Blog Image</label>
+    <input type="file" name="image" id="image" required />
+
+    <button type="submit">Add Blog</button>
+  </form>
+
+  <div class="back-link">
+    <a href="/api/user/dashboard-page">← Back to Dashboard</a>
+  </div>
+
+</body>
+
+</html>

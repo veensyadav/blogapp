@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      width: 250px;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .blogs {
+      width: 70%;
+    }
+
+    .blogs h3 {
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c82333;
+    }
+
+    .add-blog-btn {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .profile {
+      width: 25%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .profile-img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .no-blogs {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <h3>Welcome, <%= user.email %></h3>
+    </div>
+
+    <div class="main-content">
+      <div class="blogs">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3>Your Blogs</h3>
+          <a href="/api/user/blog" class="add-blog-btn">Add Blog</a>
+        </div>
+
+        <% if (blogs.length > 0) { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% blogs.forEach(blog => { %>
+                <tr>
+                  <td><%= blog.title %></td>
+                  <td><%= blog.description %></td>
+                  <td>
+                    <a href="/api/user/blog/<%= blog._id %>">View</a> |
+                    <a href="/api/user/blog/edit/<%= blog._id %>">Edit</a> |
+                    <form action="/api/user/blog/delete/<%= blog._id %>?_method=DELETE" method="POST"
+                      style="display:inline;">
+                      <button type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <div class="no-blogs">
+            <strong>No Blogs Exist</strong><br><br>
+            <a href="/api/user/blog" class="add-blog-btn">Add Blog</a>
+          </div>
+        <% } %>
+      </div>
+
+      <div class="profile">
+        <img src="/uploads/blogs/<%= user.profileImage %>" alt="Profile Image" class="profile-img" width="100px" />
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
